@@ -2,6 +2,7 @@
   "name": "libp2p-connection-manager",
   "version": "0.0.2",
   "description": "JS Libp2p Connection Manager",
+  "leadMaintainer": "Vasco Santos <vasco.santos@moxy.studio>",
   "main": "src/index.js",
   "scripts": {
     "lint": "aegir lint",
@@ -19,9 +20,8 @@
     "connection",
     "resource"
   ],
-  "author": "Pedro Teixeira <i@pgte.me>",
   "license": "MIT",
-  "pre-commit": [
+  "pre-push": [
     "lint",
     "test"
   ],
@@ -41,9 +41,7 @@
     "os": "^0.1.1",
     "peer-id": "^0.10.7",
     "peer-info": "^0.14.1",
-    "pre-commit": "^1.2.2",
     "rimraf": "^2.6.2",
-    "safe-buffer": "^5.1.1",
     "uuid": "^3.2.1"
   },
   "dependencies": {
