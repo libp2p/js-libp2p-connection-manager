@@ -20,9 +20,8 @@
     "connection",
     "resource"
   ],
-  "author": "Pedro Teixeira <i@pgte.me>",
   "license": "MIT",
-  "pre-commit": [
+  "pre-push": [
     "lint",
     "test"
   ],
@@ -42,7 +41,6 @@
     "os": "^0.1.1",
     "peer-id": "^0.10.7",
     "peer-info": "^0.14.1",
-    "pre-commit": "^1.2.2",
     "rimraf": "^2.6.2",
     "safe-buffer": "^5.1.1",
     "uuid": "^3.2.1"
