@@ -42,7 +42,6 @@
     "peer-id": "^0.10.7",
     "peer-info": "^0.14.1",
     "rimraf": "^2.6.2",
-    "safe-buffer": "^5.1.1",
     "uuid": "^3.2.1"
   },
   "dependencies": {
