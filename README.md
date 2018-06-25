@@ -11,6 +11,10 @@
 
 > JavaScript connection manager for libp2p
 
+## Lead Maintainer
+
+[Vasco Santos](https://github.com/vasco-santos).
+
 ## Table of Contents
 
 - [Install](#install)
