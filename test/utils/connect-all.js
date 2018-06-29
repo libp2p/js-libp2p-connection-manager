@@ -1,7 +1,7 @@
 'use strict'
 
 const eachSeries = require('async/eachSeries')
-const without = require('lodash.without')
+const without = require('lodash/without')
 
 module.exports = (nodes, callback) => {
   eachSeries(

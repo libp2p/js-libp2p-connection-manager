@@ -6,7 +6,9 @@ const map = require('async/map')
 const parallel = require('async/parallel')
 const setImmediate = require('async/setImmediate')
 const series = require('async/series')
-const _ = require('lodash')
+const findIndex = require('lodash/findIndex')
+const includes = require('lodash/includes')
+const range = require('lodash/range')
 const PeerId = require('peer-id')
 const PeerInfo = require('peer-info')
 const PeerBook = require('peer-book')
@@ -90,8 +92,8 @@ exports.mockNetwork = (calls, done) => {
  */
 exports.createMockTestNet = (repo, count, cb) => {
   parallel([
-    (cb) => map(_.range(count), (i, cb) => repo.create(`repo-${i}`), cb),
-    (cb) => map(_.range(count), (i, cb) => PeerId.create(cb), cb)
+    (cb) => map(range(count), (i, cb) => repo.create(`repo-${i}`), cb),
+    (cb) => map(range(count), (i, cb) => PeerId.create(cb), cb)
   ], (err, results) => {
     if (err) {
       return cb(err)
@@ -100,18 +102,18 @@ exports.createMockTestNet = (repo, count, cb) => {
     const ids = results[1]
 
     const hexIds = ids.map((id) => id.toHexString())
-    const bitswaps = _.range(count).map((i) => new Bitswap({}, stores[i]))
-    const networks = _.range(count).map((i) => {
+    const bitswaps = range(count).map((i) => new Bitswap({}, stores[i]))
+    const networks = range(count).map((i) => {
       return {
         connectTo (id, cb) {
           const done = (err) => setImmediate(() => cb(err))
-          if (!_.includes(hexIds, id.toHexString())) {
+          if (!includes(hexIds, id.toHexString())) {
             return done(new Error('unkown peer'))
           }
           done()
         },
         sendMessage (id, msg, cb) {
-          const j = _.findIndex(hexIds, (el) => el === id.toHexString())
+          const j = findIndex(hexIds, (el) => el === id.toHexString())
           bitswaps[j]._receiveMessage(ids[i], msg, cb)
         },
         start () {
@@ -119,7 +121,7 @@ exports.createMockTestNet = (repo, count, cb) => {
       }
     })
 
-    _.range(count).forEach((i) => {
+    range(count).forEach((i) => {
       exports.applyNetwork(bitswaps[i], networks[i])
       bitswaps[i].start()
     })
@@ -144,7 +146,7 @@ exports.genBitswapNetwork = (n, callback) => {
   const basePort = 12000
 
   // create PeerInfo and libp2p.Node for each
-  map(_.range(n), (i, cb) => PeerInfo.create(cb), (err, peers) => {
+  map(range(n), (i, cb) => PeerInfo.create(cb), (err, peers) => {
     if (err) {
       return callback(err)
     }
