@@ -1,15 +1,16 @@
 'use strict'
 
-const _ = require('lodash')
+const range = require('lodash/range')
+const isEqual = require('lodash/isEqual')
 
 exports.orderedFinish = (n, callback) => {
-  const r = _.range(1, n + 1)
+  const r = range(1, n + 1)
   const finishs = []
 
   return (i) => {
     finishs.push(i)
     if (finishs.length === n) {
-      if (!_.isEqual(r, finishs)) {
+      if (!isEqual(r, finishs)) {
         return callback(new Error('Invalid finish order: ' + finishs))
       }
       callback()
