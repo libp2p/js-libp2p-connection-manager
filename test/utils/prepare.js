@@ -7,7 +7,7 @@ const expect = chai.expect
 const series = require('async/series')
 const each = require('async/each')
 
-const createThing = require('./create-thing')
+const createLibp2pNode = require('./create-libp2p-node')
 const connectAll = require('./connect-all')
 const tryConnectAll = require('./try-connect-all')
 
@@ -25,7 +25,7 @@ module.exports = (count, options) => {
   const create = (done) => {
     const tasks = []
     for (let i = 0; i < count; i++) {
-      tasks.push((cb) => createThing(options.shift() || {}, cb))
+      tasks.push((cb) => createLibp2pNode(options.shift() || {}, cb))
     }
 
     series(tasks, (err, things) => {
@@ -66,8 +66,7 @@ module.exports = (count, options) => {
 
     each(nodes, (node, cb) => {
       series([
-        (cb) => node.libp2pNode.stop(cb),
-        (cb) => node.repo.teardown(cb)
+        (cb) => node.stop(cb)
       ], cb)
     }, done)
   }
@@ -79,6 +78,6 @@ module.exports = (count, options) => {
     before,
     after,
     things: () => nodes,
-    connManagers: () => nodes.map((node) => node.libp2pNode.connectionManager)
+    connManagers: () => nodes.map((node) => node.connectionManager)
   }
 }

@@ -9,7 +9,7 @@ module.exports = (nodes, callback) => {
     (node, cb) => {
       eachSeries(
         without(nodes, node),
-        (otherNode, cb) => node.libp2pNode.dial(otherNode.libp2pNode.peerInfo, cb),
+        (otherNode, cb) => node.dial(otherNode.peerInfo, cb),
         cb
       )
     },
