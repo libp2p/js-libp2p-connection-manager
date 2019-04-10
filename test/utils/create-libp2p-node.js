@@ -31,7 +31,7 @@ class Node extends libp2p {
     // TODO: once libp2p 0.25 has been released this should be removed
     // It's are here to bridge the gap made by the circular dependency.
     // Ideally connection manager should be mocking libp2p instead of depending on it for testing.
-    if (!this._switch.listeners('connection:start')) {
+    if (this._switch.listeners('connection:start').length === 0) {
       this.on('peer:connect', (peer) => this.emit('connection:start', peer))
       this.on('peer:disconnect', (peer) => this.emit('connection:end', peer))
     }
