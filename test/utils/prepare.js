@@ -65,7 +65,6 @@ module.exports = (count, options) => {
     if (!nodes) { return done() }
 
     each(nodes, (node, cb) => {
-      node.connManager.stop()
       series([
         (cb) => node.libp2pNode.stop(cb),
         (cb) => node.repo.teardown(cb)
@@ -80,6 +79,6 @@ module.exports = (count, options) => {
     before,
     after,
     things: () => nodes,
-    connManagers: () => nodes.map((node) => node.connManager)
+    connManagers: () => nodes.map((node) => node.libp2pNode.connectionManager)
   }
 }

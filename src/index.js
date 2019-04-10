@@ -137,8 +137,8 @@ class ConnectionManager extends EventEmitter {
   }
 
   _checkLimit (name, value) {
-    debug('checking limit. current value of %s is %d', name, value)
     const limit = this._options[name]
+    debug('checking limit of %s. current value: %d of %d', name, value, limit)
     if (value > limit) {
       debug('%s: limit exceeded: %s, %d', this._peerId, name, value)
       this.emit('limit:exceeded', name, value)

@@ -18,8 +18,6 @@ describe('setPeerValue', function () {
   after(prepare.after)
 
   it('kicks out lower valued peer first', function (done) {
-    this.timeout(10000)
-
     let disconnects = 0
     let firstConnectedPeer
     const manager = prepare.connManagers()[0]
@@ -35,6 +33,7 @@ describe('setPeerValue', function () {
       disconnects++
       expect(disconnects).to.be.most(PEER_COUNT - 2)
       expect(peerId).to.not.be.equal(firstConnectedPeer)
+      manager.removeAllListeners('disconnected')
       done()
     })
 
