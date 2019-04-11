@@ -1,6 +1,6 @@
 {
   "name": "libp2p-connection-manager",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "JS Libp2p Connection Manager",
   "leadMaintainer": "Vasco Santos <vasco.santos@moxy.studio>",
   "main": "src/index.js",
@@ -45,6 +45,8 @@
   },
   "contributors": [
     "David Dias <daviddias.p@gmail.com>",
-    "Pedro Teixeira <i@pgte.me>"
+    "Jacob Heun <jacobheun@gmail.com>",
+    "Pedro Teixeira <i@pgte.me>",
+    "Vasco Santos <vasco.santos@ua.pt>"
   ]
 }
