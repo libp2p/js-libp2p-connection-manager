@@ -25,6 +25,7 @@ describe('maxData', function () {
     manager.on('disconnected', () => {
       disconnects++
       expect(disconnects).to.be.most(PEER_COUNT - 2)
+      manager.removeAllListeners('disconnected')
       done()
     })
 

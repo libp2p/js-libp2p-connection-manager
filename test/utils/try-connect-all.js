@@ -12,8 +12,8 @@ module.exports = (nodes, callback) => {
       eachSeries(
         without(nodes, node),
         (otherNode, cb) => {
-          const otherNodePeerInfo = otherNode.libp2pNode.peerInfo
-          node.libp2pNode.dial(otherNodePeerInfo, (err) => {
+          const otherNodePeerInfo = otherNode.peerInfo
+          node.dial(otherNodePeerInfo, (err) => {
             if (!err) {
               connectedTo.push(otherNodePeerInfo.id.toB58String())
             }

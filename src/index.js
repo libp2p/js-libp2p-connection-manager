@@ -47,8 +47,8 @@ class ConnectionManager extends EventEmitter {
 
   start () {
     this._stats.on('update', this._onStatsUpdate)
-    this._libp2p.on('peer:connect', this._onPeerConnect)
-    this._libp2p.on('peer:disconnect', this._onPeerDisconnect)
+    this._libp2p.on('connection:start', this._onPeerConnect)
+    this._libp2p.on('connection:end', this._onPeerDisconnect)
     // latency monitor
     this._latencyMonitor = new LatencyMonitor({
       dataEmitIntervalMs: this._options.pollInterval
@@ -59,8 +59,8 @@ class ConnectionManager extends EventEmitter {
 
   stop () {
     this._stats.removeListener('update', this._onStatsUpdate)
-    this._libp2p.removeListener('peer:connect', this._onPeerConnect)
-    this._libp2p.removeListener('peer:disconnect', this._onPeerDisconnect)
+    this._libp2p.removeListener('connection:start', this._onPeerConnect)
+    this._libp2p.removeListener('connection:end', this._onPeerDisconnect)
     this._latencyMonitor.removeListener('data', this._onLatencyMeasure)
   }
 
@@ -137,8 +137,8 @@ class ConnectionManager extends EventEmitter {
   }
 
   _checkLimit (name, value) {
-    debug('checking limit. current value of %s is %d', name, value)
     const limit = this._options[name]
+    debug('checking limit of %s. current value: %d of %d', name, value, limit)
     if (value > limit) {
       debug('%s: limit exceeded: %s, %d', this._peerId, name, value)
       this.emit('limit:exceeded', name, value)
