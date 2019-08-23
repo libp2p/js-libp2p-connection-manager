@@ -1,3 +1,6 @@
+⛔️ DEPRECATED: libp2p-connection-manager is now included in js-libp2p
+=====
+
 # libp2p-connection-manager
 
 [![](https://img.shields.io/badge/made%20by-Protocol%20Labs-blue.svg?style=flat-square)](http://protocol.ai)
